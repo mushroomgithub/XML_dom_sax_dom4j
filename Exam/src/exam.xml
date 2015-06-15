@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- 采用xml文档做数据库保存学生基本考试信息 
+	，开始初始化两条数据 -->
+<exam>
+	<student examid="222" idcard="111">
+		<name>张三</name>
+		<location>沈阳</location>
+		<grade>89</grade>
+	</student>
+
+	<student examid="7492728401" idcard="271371">
+		<name>mushroom</name>
+		<location>郑州</location>
+		<grade>96.0</grade>
+	</student>
+</exam>
