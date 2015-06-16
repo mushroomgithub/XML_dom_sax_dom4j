@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xml文档如何引入xsd约束文档，首先定义一个默认名字空间 xmlns="http://www.lnu.cn"
+	但是此时定义的名字空间只是一个虚的名字空间，xml文档并不知道约束文档确切的位置，需要指定虚名字空间来自哪，这是就需要
+	xsi:schemaLocation="http://www.lnu.cn shiporder.xsd"，它是有两部分组成，前部分是定义的默认名字空间，后半部分为约束文档名，两部分
+	使用空格分隔，注意由于此处约束文档和xml文档在同一级目录下，所以采用相对路径，也可指定绝对路径。
+	但是在指定约束文档确切位置的时候又使用了schemaLocation，所以还需要指定schemaLocation来自哪，
+	这就需要xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"，这个是w3c组织的，编译器知道其位置
+-->
+<shiporder xmlns="http://www.lnu.cn" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.lnu.cn shiporder.xsd" 
+	orderid="123">
+	<orderperson>fafa</orderperson>
+	<shipto>
+		<name>mushroom</name>
+		<address>郑州</address>
+		<city>郑州</city>
+		<country>中国</country>
+	</shipto>
+	<item>
+		<title>javaWeb内幕</title>
+		<note>技术书籍</note>
+		<quantity>321</quantity>
+		<price>10.9</price>
+	</item>
+</shiporder>
