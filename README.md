@@ -7,6 +7,7 @@ XML解析技术之dom、Sax、dom4j技术演习
 
 ####Sax
 >* Sax是采用SaX技术解析XMl文档的实例。
+
 ---
 
 ####dom4j技术解析XML文档
@@ -16,9 +17,10 @@ XML解析技术之dom、Sax、dom4j技术演习
 ---
 
 * 注意：如果再使用dom4j过程中提示缺少别的jar包，解决方法是下载好的dom4j-1.6.1第三方库中找到lib目录下响应的jar包拷贝到项目lib目录下，引入方式参照dom4j-1.6.1.jar的引入方法就可以解决。
-* 
+
 ####Schema技术
-* 一种替代DTD约束XML文档编写的技术Schema,对XML的约束更加严格
+>* 一种替代DTD约束XML文档编写的技术Schema,对XML的约束更加严格
+
 ---
 
 ####Demo1
