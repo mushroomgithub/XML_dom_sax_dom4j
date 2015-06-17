@@ -1,11 +1,10 @@
 # XML_StuGradeExam_dom
 XML解析技术之dom、Sax、dom4j技术演习
 ##Exam
->Exam是一个使用Xml持久化保存数据的xml数据库，该项目是演练dom解析XML技术
-很好的一个实例。
+>Exam是一个使用Xml持久化保存数据的xml数据库，该项目是演练dom解析XML技术很好的一个实例。
 ====
 ##Sax
->*Sax是采用SaX技术解析XMl文档的实例。
+>Sax是采用SaX技术解析XMl文档的实例。
 ##dom4j技术解析XML文档
 >是一种更好的解析XML文档技术，但是单纯的依赖dom4j的话，每次定位文档元素都必须从根节点开始，效率稍慢而且相对繁琐，为此可以借助xPath技术实现对文档标签的快速定位，包括属性，标签，内容都可以快速定位，相当于于js中的RegExp技术，非常强大。
 在使用dom4j第三开源库时，需要下载dom4j-1.6.1软件开发包，在工程下面dom4j下面创建lib文件夹，将dom4j-1.6.1软件开发包中的dom4j-1.6.1.jar包拷贝到lib目录下，然后右该jar包找到Build Path-->Add to Build Path，将拷贝的jar包生成项目能引用的第三库，在项目下方生成Referenced Libraries目录表示引入成功，此时该目录下方就有刚才导入的dom4j-1.6.1.jar包了，这时就可以编写程序采用dom4j技术解析XML文档了，在结合XPath就可以精确定位想操作的元素或者结点，不再需要每次都先获得根元素才能访问其他结点了。
