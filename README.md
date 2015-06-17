@@ -15,7 +15,7 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
 ####Sax
 >* Sax是采用SaX技术解析XMl文档的实例；Sax(Simple API for XML)不是官方标准，但是它是XML社区事实上的标准，几乎所有的XML解析器都支持它。它不像dom一次将文档加载入内存，而是采用解析一行读取一行的方式，这样就避免了如果文档过大一次读入内存造成内存溢出的隐患，但是它只适合读取文档内容，不适合对文档进行curd操作。并且它读取的内容是放给处理器去处理的，所以在准读取文档前一定要保证处理器已经写好，该处理器可以采用实现ContentHandler接口，并实现它的所有方法实现，当然这样比麻烦，有时我们并不需要将所有方法实现，这时可以采用继承的方法让处理器类继承自DefaultHandler，并且覆盖需要使用的方法，完成自己的操作即可。
 
-**Sax解析XML一般步骤**
+##**Sax解析XML一般步骤**
 1.创建解析工厂
 '''
 SAXParserFactory factory=SAXParserFactory.newInstance();
