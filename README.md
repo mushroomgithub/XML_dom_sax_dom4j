@@ -24,7 +24,7 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
 5. 读取XML文档内容
 
 ```java
-//1.创建解析工厂
+  //1.创建解析工厂
   SAXParserFactory factory=SAXParserFactory.newInstance();
   //2.得到sax解析器
   SAXParser sp=factory.newSAXParser();
@@ -34,6 +34,153 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
   reader.setContentHandler(new ListHandler());
   //5.读取xml文档内容
   reader.parse("src/book.xml");
+```
+**创建事件处理器**</br>
+1. implements ContentHandler
+2. extends DefaultHandler
+
+*implements ContentHandler方式创建处理器*
+
+```java
+//获得xml文档所有内容
+class ListHandler implements ContentHandler{
+
+	@Override
+	public void startElement(String uri, String localName, String qName,
+			Attributes atts) throws SAXException {
+		// TODO Auto-generated method stub
+		System.out.print("<"+qName+">");
+		
+		//打印开始标签中的属性和属性值
+		for(int i=0;atts!=null&&i<atts.getLength();i++){
+			String attrName=atts.getQName(i);
+			String attrValue=atts.getValue(i);
+			System.out.println(attrName+"="+attrValue);
+		}
+	}
+	
+	@Override
+	public void characters(char[] ch, int start, int length)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		System.out.println(new String(ch,start,length));
+	}
+	
+	@Override
+	public void endElement(String uri, String localName, String qName)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		System.out.print("</"+qName+">");
+	}
+	
+	@Override
+	public void endDocument() throws SAXException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void endPrefixMapping(String prefix) throws SAXException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void ignorableWhitespace(char[] ch, int start, int length)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void processingInstruction(String target, String data)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void setDocumentLocator(Locator locator) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void skippedEntity(String name) throws SAXException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void startDocument() throws SAXException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void startPrefixMapping(String prefix, String uri)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		
+	}
+}
+```
+*extends DefaultHandler*
+
+```java
+/*实际开发中都是将xml中的每一本书封装到一个book对象中，并把多个book对象放在一个list集合中返回，
+即将处理的数据解析到一个对象中缓存*/
+class BeanListHandler extends DefaultHandler{
+
+	public List getList() {
+		return list;
+	}
+
+	private List list=new ArrayList();
+	private Book book;
+	private String currentName;
+	@Override
+	public void startElement(String uri, String localName, String qName,
+			Attributes attributes) throws SAXException {
+		// TODO Auto-generated method stub
+		super.startElement(uri, localName, qName, attributes);
+		currentName=qName;
+		if("书".equals(currentName)){
+			book=new Book();
+		}
+	}
+	
+	@Override
+	public void characters(char[] ch, int start, int length)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		super.characters(ch, start, length);
+		if("书名".equals(currentName)){
+			String bookName=new String(ch,start,length);
+			book.setBookName(bookName);
+		}
+		if("作者".equals(currentName)){
+			String bookAuthor=new String(ch,start,length);
+			book.setBookAuthor(bookAuthor);
+		}
+		if("售价".equals(currentName)){
+			String bookPrice=new String(ch,start,length);
+			book.setBookPrice(bookPrice);
+		}
+	}
+
+	@Override
+	public void endElement(String uri, String localName, String qName)
+			throws SAXException {
+		// TODO Auto-generated method stub
+		super.endElement(uri, localName, qName);
+		if(qName.equals("书")){//如果遇到书的结束标签
+			list.add(book);
+			book=null;
+		}
+		currentName=null;//一定要制空，否则会抛出空指针异常
+	}
+}
 ```
 ---
 
@@ -47,6 +194,19 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
 
 ####Schema技术
 >* 一种替代DTD约束XML文档编写的技术Schema,对XML的约束更加严格
+
+**XML Schema VS DTD**</br>
+* XML Schema符合XML语法结构
+* DOM、SAX等XML API很容易解析出XML Schema文档中的内容。
+* XML Schema比XML DTD支持更多的数据类型，并支持对XML实例文档做出细致的语义限制。
+* XML Schema不能像DTD一样定义实体，比DTD更复杂,但XML Schema现在已经是w3c组织的标准，它正逐步取代DTD。
+
+**XML Schema如何使用**</br>
+* XML Schema文件自身就是一个XML文件，也即它是一个可以约束另外一个XML文档编写规范的XML文档，但是它的扩展名是.xsd。
+* 一个XML Schema文档通常称之为模式文档(约束文档)，遵循这个文档编写的XML文档称之为实例文档。
+* 和XML文档一样，一个XML文档也必须有一个根结点，但这个跟结点的名称必须是Schema。
+>编写了一个XMLSchema约束文档后，通常需要把这个文件中声明的元素绑定到一个URI地址上，在XML Schema技术中有一个专业术语来描述这个过程，即把XML Schema文档生命的元素绑定到一个名称空间上，以后XML文件就可以通过这个
+URI(即名称空间)来告诉解析引擎,XML文档编写的元素来自哪里，被谁约束。
 
 ---
 
