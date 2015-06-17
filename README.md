@@ -36,10 +36,10 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
   reader.parse("src/book.xml");
 ```
 **创建事件处理器**</br>
-1. implements ContentHandler
-2. extends DefaultHandler
+* implements ContentHandler
+* extends DefaultHandler
 
-*implements ContentHandler方式创建处理器*
+1. implements ContentHandler方式创建处理器
 
 ```java
 //获得xml文档所有内容
@@ -125,7 +125,7 @@ class ListHandler implements ContentHandler{
 	}
 }
 ```
-*extends DefaultHandler*
+2. extends DefaultHandler
 
 ```java
 /*实际开发中都是将xml中的每一本书封装到一个book对象中，并把多个book对象放在一个list集合中返回，
@@ -205,7 +205,8 @@ class BeanListHandler extends DefaultHandler{
 * XML Schema文件自身就是一个XML文件，也即它是一个可以约束另外一个XML文档编写规范的XML文档，但是它的扩展名是.xsd。
 * 一个XML Schema文档通常称之为模式文档(约束文档)，遵循这个文档编写的XML文档称之为实例文档。
 * 和XML文档一样，一个XML文档也必须有一个根结点，但这个跟结点的名称必须是Schema。
->编写了一个XMLSchema约束文档后，通常需要把这个文件中声明的元素绑定到一个URI地址上，在XML Schema技术中有一个专业术语来描述这个过程，即把XML Schema文档生命的元素绑定到一个名称空间上，以后XML文件就可以通过这个
+
+> 编写了一个XMLSchema约束文档后，通常需要把这个文件中声明的元素绑定到一个URI地址上，在XML Schema技术中有一个专业术语来描述这个过程，即把XML Schema文档生命的元素绑定到一个名称空间上，以后XML文件就可以通过这个
 URI(即名称空间)来告诉解析引擎,XML文档编写的元素来自哪里，被谁约束。
 
 ---
