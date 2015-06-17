@@ -23,8 +23,8 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
 4. 设置内容处理器,一定要在读取之前将处理器写好
 5. 读取XML文档内容
 
-'''java
-  //1.创建解析工厂
+```java
+//1.创建解析工厂
   SAXParserFactory factory=SAXParserFactory.newInstance();
   //2.得到sax解析器
   SAXParser sp=factory.newSAXParser();
@@ -34,8 +34,7 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
   reader.setContentHandler(new ListHandler());
   //5.读取xml文档内容
   reader.parse("src/book.xml");
-'''
-
+```
 ---
 
 ####dom4j技术解析XML文档
