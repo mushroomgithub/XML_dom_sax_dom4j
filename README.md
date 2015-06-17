@@ -35,11 +35,12 @@ XML解析技术之dom、Sax、dom4j技术演习以及Schema XML文档约束
   //5.读取xml文档内容
   reader.parse("src/book.xml");
 ```
-**创建事件处理器**</br>
-* implements ContentHandler
-* extends DefaultHandler
+**创建事件处理器**
 
-1. implements ContentHandler方式创建处理器
+1. implements ContentHandler
+2. extends DefaultHandler
+
+**implements ContentHandler方式创建处理器**
 
 ```java
 //获得xml文档所有内容
@@ -125,7 +126,7 @@ class ListHandler implements ContentHandler{
 	}
 }
 ```
-2. extends DefaultHandler
+**extends DefaultHandler**
 
 ```java
 /*实际开发中都是将xml中的每一本书封装到一个book对象中，并把多个book对象放在一个list集合中返回，
@@ -195,13 +196,15 @@ class BeanListHandler extends DefaultHandler{
 ####Schema技术
 >* 一种替代DTD约束XML文档编写的技术Schema,对XML的约束更加严格
 
-**XML Schema VS DTD**</br>
+**XML Schema VS DTD**
+
 * XML Schema符合XML语法结构
 * DOM、SAX等XML API很容易解析出XML Schema文档中的内容。
 * XML Schema比XML DTD支持更多的数据类型，并支持对XML实例文档做出细致的语义限制。
 * XML Schema不能像DTD一样定义实体，比DTD更复杂,但XML Schema现在已经是w3c组织的标准，它正逐步取代DTD。
 
-**XML Schema如何使用**</br>
+**XML Schema如何使用**
+
 * XML Schema文件自身就是一个XML文件，也即它是一个可以约束另外一个XML文档编写规范的XML文档，但是它的扩展名是.xsd。
 * 一个XML Schema文档通常称之为模式文档(约束文档)，遵循这个文档编写的XML文档称之为实例文档。
 * 和XML文档一样，一个XML文档也必须有一个根结点，但这个跟结点的名称必须是Schema。
